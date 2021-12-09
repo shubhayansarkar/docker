@@ -1,4 +1,6 @@
 import pandas as pd
+import io
+import requests
 # We import the necessary packages
 # import the needed packages
 import cv2
@@ -9,10 +11,15 @@ from PIL import Image
 from collections import namedtuple
 
 def txt(filename):
-    image=cv2.imread(f'static/uploads/{filename}',0)
+    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+    # image=cv2.imread(f'static/uploads/{filename}',0)
+    response = requests.get(
+        f"https://trial22.blob.core.windows.net/photoes/{filename}")
+    # print( type(response) ) # <class 'requests.models.Response'>
+    img = Image.open(io.BytesIO(response.content))
 
-    pytesseract.pytesseract.tesseract_cmd=r'C:\Program Files\Tesseract-OCR\tesseract.exe'
-    text=(pytesseract.image_to_string(image)).lower()
+
+    text=(pytesseract.image_to_string(img)).lower()
     new_vend_re = re.compile(r'^\d{12}.*')
     signed_re = re.compile(r'^signed: .*')
     price = re.findall(r'[\d,]+\.\d{2}', text)
@@ -54,7 +61,5 @@ def txt(filename):
 
 
     df=pd.DataFrame(line_items)
+
     return df
-
-
-
