@@ -25,10 +25,11 @@ def upload():
 def success():
     if request.method == 'POST':
         f=request.files.getlist('file')
+        name1=''
         for j in f:
             name = j.filename
             print(type(name))
-            name1=f"{name}_output"
+            name1 += f"{name}_output, "
             print(name1)
             print(type(name1))
             azureconfig.addtoblob(name,j)

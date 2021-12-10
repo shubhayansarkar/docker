@@ -12,6 +12,9 @@ from collections import namedtuple
 
 def txt(filename):
     pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+    # pytesseract.pytesseract.tesseract_cmd ='https://drive.google.com/file/d/1vxakdUNLneD1ydeZt9Yzr18U0sY6JeR9/view?usp=sharing'
+    # pytesseract.pytesseract.tesseract_cmd = r'static/tesseract.exe'
+    # pytesseract.pytesseract.tesseract_cmd = 'https://trial22.blob.core.windows.net/photoes/tesseract.exe'
     # image=cv2.imread(f'static/uploads/{filename}',0)
     response = requests.get(
         f"https://trial22.blob.core.windows.net/photoes/{filename}")
@@ -63,3 +66,4 @@ def txt(filename):
     df=pd.DataFrame(line_items)
 
     return df
+txt('0211.jpg')
