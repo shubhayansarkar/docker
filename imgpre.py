@@ -11,7 +11,8 @@ from PIL import Image
 from collections import namedtuple
 
 def txt(filename):
-    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+    # pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+    pytesseract.pytesseract.tesseract_cmd = os.environ.get('TESSDATA_PREFIX')
     # pytesseract.pytesseract.tesseract_cmd ='https://drive.google.com/file/d/1vxakdUNLneD1ydeZt9Yzr18U0sY6JeR9/view?usp=sharing'
     # pytesseract.pytesseract.tesseract_cmd = r'static/tesseract.exe'
     # pytesseract.pytesseract.tesseract_cmd = 'https://trial22.blob.core.windows.net/photoes/tesseract.exe'
